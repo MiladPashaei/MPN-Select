@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+import MultiSelect from "./Components/MultiSelect";
+import Options from "./Components/Options";
 
 function App() {
+  let test = [
+    { id: 1, title: "milad" },
+    { id: 2, title: "mehran" },
+  ];
+  function handleChange(e: any) {
+    console.log(e);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MultiSelect onChange={handleChange} value={[2]}>
+        {test.map((item) => {
+          let condition = item.id === 1;
+          return (
+            <Options
+              disable={condition}
+              key={item.id}
+              title={item.title}
+              value={item.id}
+            />
+          );
+        })}
+      </MultiSelect>
     </div>
   );
 }
